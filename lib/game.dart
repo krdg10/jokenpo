@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jokenpo/gamelogic.dart';
 
 class Game extends StatefulWidget {
-  const Game({Key? key}) : super(key: key);
+  final String level;
+  const Game({Key? key, required this.level}) : super(key: key);
 
   @override
   State<Game> createState() => _GameState();
@@ -15,14 +16,41 @@ class _GameState extends State<Game> {
   GameLogic gamelogic = GameLogic();
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text('Jokenpo'),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16.0,
+              ),
+              child: Center(
+                child: Text(
+                  'Escolha do App',
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              child: Image.asset(
+                imagemEscolhaApp,
+                width: 250,
+                height: 250,
+              ),
+            ),
+            Container(
               child: Text(
-                'Escolha do App',
+                resultado,
                 style: TextStyle(
                   color: Colors.blueAccent,
                   fontWeight: FontWeight.bold,
@@ -30,38 +58,21 @@ class _GameState extends State<Game> {
                 ),
               ),
             ),
-          ),
-          Container(
-            child: Image.asset(
-              imagemEscolhaApp,
-              width: 250,
-              height: 250,
-            ),
-          ),
-          Container(
-            child: Text(
-              resultado,
-              style: TextStyle(
-                color: Colors.blueAccent,
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
+            Padding(
+              padding: const EdgeInsets.only(top: 24.0),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    botao(context, 'tesoura'),
+                    botao(context, 'pedra'),
+                    botao(context, 'papel'),
+                  ],
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 24.0),
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  botao(context, 'tesoura'),
-                  botao(context, 'pedra'),
-                  botao(context, 'papel'),
-                ],
-              ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -71,7 +82,7 @@ class _GameState extends State<Game> {
       onTap: () {
         modal(context);
         setState(() {
-          escolhaApp = gamelogic.takeRandomValue();
+          escolhaApp = gamelogic.takeRandomValue(widget.level, jogada);
           imagemEscolhaApp = escolhaApp + '.png';
           print(imagemEscolhaApp);
           resultado = gamelogic.selectWinner(jogada, escolhaApp);
