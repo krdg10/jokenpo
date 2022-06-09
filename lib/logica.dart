@@ -86,3 +86,4 @@ class GameLogic {
     return resultado;
   }
 }
+//adicionando
