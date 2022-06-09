@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jokenpo/gamelogic.dart';
+import 'package:jokenpo/logica.dart';
 
 class Game extends StatefulWidget {
   final String level;
@@ -84,7 +84,6 @@ class _GameState extends State<Game> {
         setState(() {
           escolhaApp = gamelogic.takeRandomValue(widget.level, jogada);
           imagemEscolhaApp = escolhaApp + '.png';
-          print(imagemEscolhaApp);
           resultado = gamelogic.selectWinner(jogada, escolhaApp);
         });
       },
