@@ -31,80 +31,116 @@ class _GameState extends State<Game> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 8.0,
-                  left: 55.0,
-                  right: 55.0,
-                ),
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Você',
-                        style: TextStyle(
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8.0,
+                      left: 55.0,
+                      right: 55.0,
+                    ),
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Você',
+                            style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            'App',
+                            style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'App',
-                        style: TextStyle(
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  Container(
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      //itemCount: 3,
+                      itemCount: imagensApp.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                      ),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            left: 16,
+                            right: 16,
+                          ),
+                          child: Image.asset(
+                            imagensApp[index],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      resultado,
+                      style: TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  //itemCount: 3,
-                  itemCount: imagensApp.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Padding(
+              Padding(
+                padding: const EdgeInsets.only(top: 120.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: Container(
+                        child: Text(
+                          'Nova Jogada',
+                          style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          botao(context, 'tesoura'),
+                          botao(context, 'pedra'),
+                          botao(context, 'papel'),
+                        ],
+                      ),
+                    ),
+                    Padding(
                       padding: const EdgeInsets.only(
-                        left: 16,
+                        left: 16.0,
                         right: 16,
+                        top: 24,
                       ),
-                      child: Image.asset(
-                        imagensApp[index],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Texto('Placar', 0),
+                          Texto('Você', winPlayer),
+                          Texto('App', winApp),
+                        ],
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
-              ),
-              Container(
-                child: Text(
-                  resultado,
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 24.0),
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      botao(context, 'tesoura'),
-                      botao(context, 'pedra'),
-                      botao(context, 'papel'),
-                    ],
-                  ),
-                ),
-              ),
+              )
             ],
           ),
         ),
@@ -124,7 +160,7 @@ class _GameState extends State<Game> {
       );
     } else {
       return Text(
-        texto + ' ' + numeroDePontos.toString(),
+        texto + ': ' + numeroDePontos.toString(),
         style: TextStyle(
           color: Color.fromARGB(255, 42, 48, 58),
           fontWeight: FontWeight.bold,
