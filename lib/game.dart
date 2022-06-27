@@ -105,6 +105,20 @@ class _GameState extends State<Game> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  right: 16,
+                  top: 80,
+                ),
+                child: Column(
+                  children: [
+                    Texto('Placar', 0),
+                    Texto('Você', winPlayer),
+                    Texto('App', winApp),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

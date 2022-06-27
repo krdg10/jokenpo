@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jokenpo/game.dart';
 import 'package:jokenpo/level.dart';
 
 class Home extends StatelessWidget {
